@@ -1,9 +1,9 @@
-import Header from "../components/Header";
+import Header from '../components/Header';
 
 function Wallet() {
   return (
     <div>
-      <Header/>
+      <Header />
     </div>
   );
 }
