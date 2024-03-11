@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { User } from '../types';
-import { actionUser } from '../redux/actions';
+import { Dispatch, User } from '../types';
+import { actionUser, fetchmoedas } from '../redux/actions';
 
 function Login() {
   const navigate = useNavigate();
-  const dispach = useDispatch();
+  const dispach:Dispatch = useDispatch();
   const [buttonAble, setButtonAble] = useState<boolean>(true);
   const [form, setForm] = useState<User>({
     email: '',
@@ -34,6 +34,7 @@ function Login() {
       onSubmit={ (e) => {
         e.preventDefault();
         dispach(actionUser(form));
+        dispach(fetchmoedas());
         navigate('/carteira');
       } }
     >
