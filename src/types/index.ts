@@ -6,6 +6,24 @@ export type User = {
   senha?: string,
 };
 
+export type InfoUser = {
+  user: User
+};
+
+export type InfoMoedas = {
+  wallet: Wallet
+};
+
+export type InfoDespesa = {
+  valor: string,
+    descrição: string,
+    moeda: string,
+    pagamento: string,
+    despesa: string,
+    id: number,
+    exchangeRates: object,
+}
+
 export type ObjectMoeda = {
   ask: string;
   bid: string;
@@ -22,7 +40,7 @@ export type ObjectMoeda = {
 
 export type Wallet = {
   currencies: ObjectMoeda[],
-  expenses: object[],
+  expenses: InfoDespesa[],
   editor: boolean,
   idToEdit: number,
 };

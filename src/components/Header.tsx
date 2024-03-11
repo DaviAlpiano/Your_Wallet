@@ -1,12 +1,11 @@
 import { useSelector } from 'react-redux';
-import { User } from '../types';
+import { InfoMoedas, InfoUser, User } from '../types';
 
-type InfoUser = {
-  user: User
-};
+
 
 function Header() {
   const infoUser = useSelector((state: InfoUser) => state.user);
+  const carteira = useSelector((state:InfoMoedas) => state.wallet);
 
   return (
     <header>

@@ -1,7 +1,8 @@
 // Coloque aqui suas actions
-import { Dispatch, User } from '../../types';
+import { Dispatch, InfoDespesa, User } from '../../types';
 
 export const RequestSuccessful = 'RequestSuccessful';
+export const AddDespesas = 'AddDespesas'
 
 export const actionUser = (infouser:User) => ({
   type: 'user',
@@ -29,5 +30,12 @@ export function fetchmoedas() {
     } catch (error: any) {
       console.log(error);
     }
+  };
+}
+
+export function addDespesa(infos:InfoDespesa) {
+  return {
+    type: AddDespesas,
+    playload: infos,
   };
 }
