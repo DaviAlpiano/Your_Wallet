@@ -1,99 +1,109 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, InfoDespesa, InfoMoedas} from "../types";
-import { useEffect, useState } from "react";
-import { addDespesa, fetchmoedas } from "../redux/actions";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { Dispatch, InfoDespesa, InfoMoedas } from '../types';
+import { addDespesa, fetchmoedas } from '../redux/actions';
 
 function WalletForm() {
   const carteira = useSelector((state:InfoMoedas) => state.wallet);
   const dispatch:Dispatch = useDispatch();
   const [form, setForm] = useState<InfoDespesa>({
-    valor: '',
-    descrição: '',
-    moeda: '',
-    pagamento: '',
-    despesa: '',
+    value: '',
+    description: '',
+    currency: 'USD',
+    method: 'dinheiro',
+    tag: 'alimentacao',
     id: 0,
-    exchangeRates: {},
+    exchangeRates: [],
   });
 
-  const tamanhoId = carteira.expenses.length - 1;
+  const tamanhoId = carteira.expenses.length;
 
   const handleChange = (
-    { target }: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>,
+    { target }:
+    React.ChangeEvent<HTMLInputElement> |
+    React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const { id, value } = target;
-    setForm({ ...form, [id]: value,
-      id: carteira.expenses[tamanhoId].id? carteira.expenses[tamanhoId].id + 1 : 0,
-      exchangeRates: carteira.currencies.map((element) => element),
-    }); 
+    setForm({ ...form,
+      [id]: value,
+      id: tamanhoId,
+      exchangeRates: carteira.infomoedas.map((element) => element),
+    });
   };
 
   useEffect(() => {
     dispatch(fetchmoedas());
-  }, [])
-  
+  }, [dispatch]);
+
   return (
     <form
       onSubmit={ (e) => {
         e.preventDefault();
         dispatch(fetchmoedas());
         dispatch(addDespesa(form));
+        setForm({ ...form, value: '', description: '' });
       } }
     >
-      <label htmlFor="valor">
+      <label htmlFor="value">
         Valor:
         <input
           type="text"
           data-testid="value-input"
-          id="valor"
+          id="value"
+          value={ form.value }
           onChange={ handleChange }
         />
       </label>
-      <label htmlFor="descrição">
+      <label htmlFor="description">
         Descrição:
         <input
           type="text"
-          data-testid="value-input"
-          id="descrição"
+          data-testid="description-input"
+          id="description"
+          value={ form.description }
           onChange={ handleChange }
         />
       </label>
-      <label htmlFor="moeda">
+      <label htmlFor="currency">
         Moeda:
-        <select 
-        name="moeda"
-        id="moeda"
-        data-testid="currency-input"
-        onChange={ handleChange }
+        <select
+          name="currency"
+          id="currency"
+          data-testid="currency-input"
+          value={ form.currency }
+          onChange={ handleChange }
         >
-          {carteira.currencies
-          .map((element) => 
-          <option 
-          key={element.code} 
-          value={element.code}>{element.code}
-          </option>)}
+          {carteira.infomoedas
+            .map((element) => (
+              <option key={ element.code } value={ element.code }>
+                {element.code}
+                {' '}
+
+              </option>))}
         </select>
       </label>
-      <label htmlFor="pagamento">
+      <label htmlFor="method">
         Pagamento:
         <select
-        name="pagamento"
-        id="pagamento"
-        data-testid="method-input"
-        onChange={ handleChange }
+          name="method"
+          id="method"
+          data-testid="method-input"
+          value={ form.method }
+          onChange={ handleChange }
         >
           <option value="dinheiro">Dinheiro</option>
           <option value="cartao-de-credito">Cartão de crédito</option>
           <option value="cartao-de-debito">Cartão de débito</option>
         </select>
       </label>
-      <label htmlFor="despesa">
+      <label htmlFor="tag">
         Despesa:
         <select
-        name="despesa"
-        id="despesa"
-        data-testid="tag-input"
-        onChange={ handleChange }
+          name="tag"
+          id="tag"
+          data-testid="tag-input"
+          value={ form.tag }
+          onChange={ handleChange }
         >
           <option value="alimentacao">Alimentação</option>
           <option value="lazer">Lazer</option>

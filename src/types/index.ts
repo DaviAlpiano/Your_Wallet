@@ -15,14 +15,14 @@ export type InfoMoedas = {
 };
 
 export type InfoDespesa = {
-  valor: string,
-    descrição: string,
-    moeda: string,
-    pagamento: string,
-    despesa: string,
-    id: number,
-    exchangeRates: object,
-}
+  value: string,
+  description: string,
+  currency: string,
+  method: string,
+  tag: string,
+  id: number,
+  exchangeRates: ObjectMoeda[],
+};
 
 export type ObjectMoeda = {
   ask: string;
@@ -36,13 +36,14 @@ export type ObjectMoeda = {
   pctChange: string;
   timestamp: string;
   varBid: string;
-}
+};
 
 export type Wallet = {
-  currencies: ObjectMoeda[],
+  currencies: string[],
   expenses: InfoDespesa[],
   editor: boolean,
   idToEdit: number,
+  infomoedas: ObjectMoeda[],
 };
 
 export type ActionType = {

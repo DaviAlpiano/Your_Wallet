@@ -2,7 +2,7 @@
 import { Dispatch, InfoDespesa, User } from '../../types';
 
 export const RequestSuccessful = 'RequestSuccessful';
-export const AddDespesas = 'AddDespesas'
+export const AddDespesas = 'AddDespesas';
 
 export const actionUser = (infouser:User) => ({
   type: 'user',
