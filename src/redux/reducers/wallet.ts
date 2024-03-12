@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   editor: false,
   idToEdit: 0,
   infomoedas: [],
+  fetchraiz: {},
 };
 
 function wallet(state = INITIAL_STATE, action: ActionType) {
@@ -21,9 +22,9 @@ function wallet(state = INITIAL_STATE, action: ActionType) {
     case RequestSuccessful:
       return {
         ...state,
+        fetchraiz: action.playload,
         infomoedas: Object
-          .values(action.playload)
-          .filter((moeda) => moeda.codein !== 'BRLT'),
+          .values(action.playload),
         currencies: Object
           .values(action.playload)
           .filter((moeda) => moeda.codein !== 'BRLT')

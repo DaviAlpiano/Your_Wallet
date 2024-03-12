@@ -8,12 +8,12 @@ function WalletForm() {
   const dispatch:Dispatch = useDispatch();
   const [form, setForm] = useState<InfoDespesa>({
     value: '',
-    description: '',
     currency: 'USD',
     method: 'dinheiro',
     tag: 'alimentacao',
+    description: '',
     id: 0,
-    exchangeRates: [],
+    exchangeRates: null,
   });
 
   const tamanhoId = carteira.expenses.length;
@@ -27,7 +27,7 @@ function WalletForm() {
     setForm({ ...form,
       [id]: value,
       id: tamanhoId,
-      exchangeRates: carteira.infomoedas.map((element) => element),
+      exchangeRates: carteira.fetchraiz,
     });
   };
 
@@ -74,6 +74,7 @@ function WalletForm() {
           onChange={ handleChange }
         >
           {carteira.infomoedas
+            .filter((moeda) => moeda.codein !== 'BRLT')
             .map((element) => (
               <option key={ element.code } value={ element.code }>
                 {element.code}
@@ -91,9 +92,9 @@ function WalletForm() {
           value={ form.method }
           onChange={ handleChange }
         >
-          <option value="dinheiro">Dinheiro</option>
-          <option value="cartao-de-credito">Cartão de crédito</option>
-          <option value="cartao-de-debito">Cartão de débito</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
         </select>
       </label>
       <label htmlFor="tag">
@@ -105,11 +106,11 @@ function WalletForm() {
           value={ form.tag }
           onChange={ handleChange }
         >
-          <option value="alimentacao">Alimentação</option>
-          <option value="lazer">Lazer</option>
-          <option value="trabalho">Trabalho</option>
-          <option value="transporte">Transporte</option>
-          <option value="saude">Saúde</option>
+          <option value="Alimentação">Alimentação</option>
+          <option value="Lazer">Lazer</option>
+          <option value="Trabalho">Trabalho</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Saúde">Saúde</option>
         </select>
       </label>
       <button>Adicionar despesa</button>

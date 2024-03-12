@@ -11,7 +11,7 @@ function Header() {
     if (carteira.expenses.length > 0) {
       const ultimaDespesa = carteira.expenses.length - 1;
       const despesa = carteira.expenses[ultimaDespesa];
-      const moeda = despesa.exchangeRates
+      const moeda = carteira.infomoedas
         .find((infosmoeda) => infosmoeda.code === despesa.currency);
       const valor = parseFloat(despesa.value) * parseFloat(moeda.ask);
       setValorTotal((valorTotal1) => valorTotal1 + valor);

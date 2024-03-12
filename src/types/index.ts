@@ -21,7 +21,7 @@ export type InfoDespesa = {
   method: string,
   tag: string,
   id: number,
-  exchangeRates: ObjectMoeda[],
+  exchangeRates: ObjectMoeda | null,
 };
 
 export type ObjectMoeda = {
@@ -44,6 +44,7 @@ export type Wallet = {
   editor: boolean,
   idToEdit: number,
   infomoedas: ObjectMoeda[],
+  fetchraiz: ObjectMoeda,
 };
 
 export type ActionType = {
