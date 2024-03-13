@@ -1,7 +1,7 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 
-import { ActionType } from '../../types';
-import { AddDespesas, RequestSuccessful } from '../actions';
+import { ActionType, InfoDespesa } from '../../types';
+import { AddDespesas, RemoveDespesas, RequestSuccessful } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -35,6 +35,13 @@ function wallet(state = INITIAL_STATE, action: ActionType) {
       return {
         ...state,
         expenses: [...state.expenses, action.playload],
+      };
+
+    case RemoveDespesas:
+      return {
+        ...state,
+        expenses: state.expenses
+          .filter((item:InfoDespesa) => item.id.toString() !== action.playload),
       };
 
     default:

@@ -9,12 +9,18 @@ function Header() {
 
   useEffect(() => {
     if (carteira.expenses.length > 0) {
-      const ultimaDespesa = carteira.expenses.length - 1;
-      const despesa = carteira.expenses[ultimaDespesa];
-      const moeda = carteira.infomoedas
-        .find((infosmoeda) => infosmoeda.code === despesa.currency);
-      const valor = parseFloat(despesa.value) * parseFloat(moeda.ask);
-      setValorTotal((valorTotal1) => valorTotal1 + valor);
+      const valorArray = carteira.expenses.reduce((total, despesa) => {
+        const moeda = carteira.infomoedas
+          .find((infosmoeda) => infosmoeda.code === despesa.currency);
+        const valor = parseFloat(despesa.value) * parseFloat(moeda.ask);
+        return total + valor;
+      }, 0);
+
+      setValorTotal(valorArray);
+    }
+
+    if (carteira.expenses.length === 0) {
+      setValorTotal(0);
     }
   }, [carteira.expenses]);
 

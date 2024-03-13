@@ -44,12 +44,12 @@ export type Wallet = {
   editor: boolean,
   idToEdit: number,
   infomoedas: ObjectMoeda[],
-  fetchraiz: ObjectMoeda,
+  fetchraiz: { [code: string]: ObjectMoeda },
 };
 
 export type ActionType = {
   type: string,
-  playload: User | Wallet,
+  playload: User | Wallet | string,
 };
 
 export type Dispatch = ThunkDispatch<ActionType, null, AnyAction>;

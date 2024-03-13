@@ -13,7 +13,7 @@ function WalletForm() {
     tag: 'alimentacao',
     description: '',
     id: 0,
-    exchangeRates: null,
+    exchangeRates: {},
   });
 
   const tamanhoId = carteira.expenses.length;
