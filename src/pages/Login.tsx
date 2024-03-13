@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Dispatch, User } from '../types';
-import { actionUser, fetchmoedas } from '../redux/actions';
+import { actionUser } from '../redux/actions';
 
 function Login() {
   const navigate = useNavigate();
@@ -34,7 +34,6 @@ function Login() {
       onSubmit={ (e) => {
         e.preventDefault();
         dispach(actionUser(form));
-        dispach(fetchmoedas());
         navigate('/carteira');
       } }
     >
