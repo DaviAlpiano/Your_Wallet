@@ -21,7 +21,7 @@ export type InfoDespesa = {
   method: string,
   tag: string,
   id: number,
-  exchangeRates: ObjectMoeda | null,
+  exchangeRates: { [code: string]: ObjectMoeda },
 };
 
 export type ObjectMoeda = {
