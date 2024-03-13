@@ -98,7 +98,7 @@ function WalletForm() {
         </select>
       </label>
       <label htmlFor="tag">
-        Despesa:
+        Categoria:
         <select
           name="tag"
           id="tag"
