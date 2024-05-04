@@ -1,6 +1,6 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 
-import { ActionType, InfoDespesa } from '../../types';
+import { ActionType, InfoDespesa, Wallet } from '../../types';
 import { AddDespesas, EditDespesa, RemoveDespesas, RequestSuccessful } from '../actions';
 
 const INITIAL_STATE = {
@@ -11,6 +11,30 @@ const INITIAL_STATE = {
   infomoedas: [],
   fetchraiz: {},
 };
+
+function adicionarDespesa(state: Wallet, action: ActionType) {
+  if (state.editor) {
+    return {
+      ...state,
+      expenses: state.expenses.map((info:InfoDespesa) => {
+        if (info.id === state.idToEdit) {
+          return {
+            ...info, ...action.playload,
+          };
+        }
+        return info;
+      }),
+      editor: false,
+      idToEdit: null,
+    };
+  }
+  return {
+    ...state,
+    expenses: [...state.expenses, action.playload],
+    editor: false,
+    idToEdit: null,
+  };
+}
 
 function wallet(state = INITIAL_STATE, action: ActionType) {
   switch (action.type) {
@@ -32,27 +56,7 @@ function wallet(state = INITIAL_STATE, action: ActionType) {
       };
 
     case AddDespesas: {
-      if (state.editor) {
-        return {
-          ...state,
-          expenses: state.expenses.map((info:InfoDespesa) => {
-            if (info.id === state.idToEdit) {
-              return {
-                ...info, ...action.playload,
-              };
-            }
-            return info;
-          }),
-          editor: false,
-          idToEdit: null,
-        };
-      }
-      return {
-        ...state,
-        expenses: [...state.expenses, action.playload],
-        editor: false,
-        idToEdit: null,
-      };
+      return adicionarDespesa(state, action);
     }
 
     case RemoveDespesas:
