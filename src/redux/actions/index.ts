@@ -4,6 +4,7 @@ import { Dispatch, InfoDespesa, User } from '../../types';
 export const RequestSuccessful = 'RequestSuccessful';
 export const AddDespesas = 'AddDespesas';
 export const RemoveDespesas = 'RemoveDespesas';
+export const EditDespesa = 'EditDespesa';
 
 export const actionUser = (infouser:User) => ({
   type: 'user',
@@ -44,6 +45,13 @@ export function addDespesa(infos:InfoDespesa) {
 export function removeDespesa(id:string) {
   return {
     type: RemoveDespesas,
+    playload: id,
+  };
+}
+
+export function editDespesa(id:number) {
+  return {
+    type: EditDespesa,
     playload: id,
   };
 }

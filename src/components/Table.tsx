@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { InfoMoedas } from '../types';
-import { removeDespesa } from '../redux/actions';
+import { editDespesa, removeDespesa } from '../redux/actions';
 
 function Table() {
   const despesas = useSelector((state:InfoMoedas) => state.wallet.expenses);
@@ -9,6 +9,11 @@ function Table() {
   const handleChange = ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => {
     const { id } = currentTarget;
     dispatch(removeDespesa(id));
+  };
+
+  const handleClick = ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => {
+    const { id } = currentTarget;
+    dispatch(editDespesa(parseInt(id, 10)));
   };
 
   return (
@@ -44,7 +49,13 @@ function Table() {
                 <td>{convertido.toFixed(2)}</td>
                 <td>Real</td>
                 <td>
-                  <button>Editar</button>
+                  <button
+                    data-testid="edit-btn"
+                    id={ idBut }
+                    onClick={ handleClick }
+                  >
+                    Editar
+                  </button>
                   <button
                     id={ idBut }
                     onClick={ handleChange }

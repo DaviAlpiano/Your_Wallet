@@ -24,11 +24,19 @@ function WalletForm() {
     React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const { id, value } = target;
-    setForm({ ...form,
-      [id]: value,
-      id: tamanhoId,
-      exchangeRates: carteira.fetchraiz,
-    });
+    if (carteira.editor) {
+      setForm({ ...form,
+        [id]: value,
+        id: carteira.idToEdit,
+        exchangeRates: carteira.fetchraiz,
+      });
+    } else {
+      setForm({ ...form,
+        [id]: value,
+        id: tamanhoId,
+        exchangeRates: carteira.fetchraiz,
+      });
+    }
   };
 
   useEffect(() => {
@@ -113,7 +121,7 @@ function WalletForm() {
           <option value="Saúde">Saúde</option>
         </select>
       </label>
-      <button>Adicionar despesa</button>
+      <button>{carteira.editor ? 'Editar despesa' : 'Adicionar despesa'}</button>
     </form>
   );
 }
