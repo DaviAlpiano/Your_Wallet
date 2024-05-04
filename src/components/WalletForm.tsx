@@ -55,6 +55,7 @@ function WalletForm() {
       <label htmlFor="value">
         Valor:
         <input
+          required
           type="text"
           data-testid="value-input"
           id="value"
