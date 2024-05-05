@@ -1,0 +1,51 @@
+.table {
+    width: 1100px;
+    margin-top: 20px;
+    border-radius: 5px; 
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: center;
+    color: white;
+    background-color: none;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold; 
+    padding: 8px;
+    height: 50px;
+    min-width: 120px;
+}
+
+.table tbody {
+    margin-bottom: 20px;
+}
+
+.table th:not(:last-child) {
+    border-right: 1px solid #ccc;
+}
+
+.table td {
+    text-align: center;
+    max-width: 133px;
+    color: #2FC18C;
+    height: 70px;
+    width: 200px;
+    border-top: 1px solid #ddd; 
+}
+
+.td {
+    width: 200px;
+    height: 20px;
+}
+
+.but {
+    text-align: center;
+    margin-top: 2px;
+    width: 80px;
+    height: 30px;
+    color: #2FC18C;
+    cursor: pointer;
+    background-color: #007bff;
+    border-radius: 4px;
+    border: none;
+}

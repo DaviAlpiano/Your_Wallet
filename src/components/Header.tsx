@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { InfoMoedas, InfoUser } from '../types';
+import styles from './Header.module.css';
 
 function Header() {
   const infoUser = useSelector((state: InfoUser) => state.user);
@@ -25,10 +26,12 @@ function Header() {
   }, [carteira.expenses]);
 
   return (
-    <header>
-      <h3 data-testid="email-field">{ infoUser.email }</h3>
-      <h3 data-testid="total-field">{valorTotal.toFixed(2)}</h3>
-      <h3 data-testid="header-currency-field">BRL</h3>
+    <header className={ styles.header }>
+      <h3 className={ styles.h31 }>&#x1F4B8; Your Wallet &#x1F4B8;</h3>
+      <h3 className={ styles.h32 }>Total de despesas:</h3>
+      <h3 className={ styles.h31 } data-testid="total-field">{valorTotal.toFixed(2)}</h3>
+      <h3 className={ styles.h32 } data-testid="header-currency-field">BRL</h3>
+      <h3 className={ styles.h31 } data-testid="email-field">{ infoUser.email }</h3>
     </header>
   );
 }

@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { InfoMoedas } from '../types';
 import { editDespesa, removeDespesa } from '../redux/actions';
+import styles from './Table.module.css';
 
 function Table() {
+  const disbale = useSelector((state:InfoMoedas) => state.wallet.editor);
   const despesas = useSelector((state:InfoMoedas) => state.wallet.expenses);
   const dispatch = useDispatch();
 
@@ -17,7 +19,7 @@ function Table() {
   };
 
   return (
-    <table border={ 1 }>
+    <table className={ styles.table } border={ 0 }>
       <thead>
         <tr>
           <th>Descrição</th>
@@ -39,7 +41,7 @@ function Table() {
             const cambio = parseFloat(despesa.exchangeRates[despesa.currency].ask);
             const convertido = valor * cambio;
             return (
-              <tr key={ despesa.id }>
+              <tr className={ styles.tr } key={ despesa.id }>
                 <td>{despesa.description}</td>
                 <td>{despesa.tag}</td>
                 <td>{despesa.method}</td>
@@ -48,8 +50,9 @@ function Table() {
                 <td>{cambio.toFixed(2)}</td>
                 <td>{convertido.toFixed(2)}</td>
                 <td>Real</td>
-                <td>
+                <td className={ styles.buts }>
                   <button
+                    className={ styles.but }
                     data-testid="edit-btn"
                     id={ idBut }
                     onClick={ handleClick }
@@ -57,6 +60,8 @@ function Table() {
                     Editar
                   </button>
                   <button
+                    disabled={ disbale }
+                    className={ styles.but }
                     id={ idBut }
                     onClick={ handleChange }
                     data-testid="delete-btn"

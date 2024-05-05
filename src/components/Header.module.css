@@ -1,0 +1,13 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 640px;
+}
+
+.h31 {
+    color: #2FC18C;
+}
+
+.h32 {
+    color: #003BE5;
+}
